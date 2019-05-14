@@ -50,6 +50,7 @@ class SlidingUpPanel extends React.PureComponent {
     allowDragging: PropTypes.bool,
     showBackdrop: PropTypes.bool,
     backdropOpacity: PropTypes.number,
+    onBackdropPress: PropTypes.func,
     friction: PropTypes.number,
     children: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
   }
@@ -71,6 +72,7 @@ class SlidingUpPanel extends React.PureComponent {
     allowDragging: true,
     showBackdrop: true,
     backdropOpacity: 0.75,
+    onBackdropPress: null,
     friction: Constants.DEFAULT_FRICTION,
     onClose: () => null,
   }
@@ -381,6 +383,7 @@ class SlidingUpPanel extends React.PureComponent {
     }
 
     const {top, bottom} = this.props.draggableRange
+    const {onBackdropPress} = this.props
 
     const backdropOpacity = this.props.animatedValue.interpolate({
       inputRange: [bottom, top],
@@ -394,7 +397,9 @@ class SlidingUpPanel extends React.PureComponent {
         pointerEvents={this._backdropPointerEvents}
         ref={c => (this._backdrop = c)}
         onTouchStart={() => this._flick.stop()}
-        onTouchEnd={() => this.hide()}
+        onTouchEnd={() =>
+          !onBackdropPress ? this.hide(): onBackdropPress()
+        }
         style={[styles.backdrop, {opacity: backdropOpacity}]}
       />
     )

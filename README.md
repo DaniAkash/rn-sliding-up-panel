@@ -74,6 +74,7 @@ animatedValue|Animated.Value|An **Animated.Value** number between the top and bo
 |allowMomentum|boolean|If `false`, panel will not continue to move when you release your finger.
 |allowDragging|boolean|Default `true`. Setting this to `false` to disable dragging.
 |onBackButtonPress|() => boolean|By default when you press back button (Android) the panel will be closed (Move to `bottom` position of `draggableRange`). Implement this function if you want to custom the behavior. Returning `true` means the event has been handled.
+|onBackdropPress|() => void|Default `null`. You can use this to overwrite the default backdrop press action that will hide the panel.
 |onDragStart|(position: number, gestureState: GestureState) => void|Called when the panel is about to start dragging.
 |onDragEnd|(position: number: gestureState: GestureState) => void|Called when you release your finger.
 |onMomentumDragStart|(position: number) => void|Called when the momentum drag starts. Works exactly the same way of [ScrollView#onMomentumScrollBegin](https://facebook.github.io/react-native/docs/scrollview#onmomentumscrollbegin).
